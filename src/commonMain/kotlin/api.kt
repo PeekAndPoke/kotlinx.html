@@ -74,9 +74,9 @@ interface AttributeEnum {
     val realValue: String
 }
 
-inline fun <T : Tag> T.visit(crossinline block: T.() -> Unit) = visitTag { block() }
+fun <T : Tag> T.visit(block: T.() -> Unit) = visitTag { block() }
 
-inline fun <T : Tag, R> T.visitAndFinalize(consumer: TagConsumer<R>, crossinline block: T.() -> Unit): R
+fun <T : Tag, R> T.visitAndFinalize(consumer: TagConsumer<R>, block: T.() -> Unit): R
         = visitTagAndFinalize(consumer) { block() }
 
 fun attributesMapOf() = emptyMap
