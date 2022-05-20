@@ -1,6 +1,7 @@
 package kotlinx.html
 
 import org.w3c.dom.events.*
+import kotlin.js.JsName
 
 interface TagConsumer<out R> {
     fun onTagStart(tag: Tag)
@@ -27,26 +28,32 @@ interface Tag {
     val inlineTag: Boolean
     val emptyTag: Boolean
 
+    @JsName("pe")
     operator fun Entities.unaryPlus(): Unit {
         entity(this)
     }
 
+    @JsName("p")
     operator fun String.unaryPlus(): Unit {
         text(this)
     }
 
+    @JsName("t")
     fun text(s: String) {
         consumer.onTagContent(s)
     }
 
+    @JsName("t2")
     fun text(n: Number) {
         text(n.toString())
     }
 
+    @JsName("e")
     fun entity(e: Entities) {
         consumer.onTagContentEntity(e)
     }
 
+    @JsName("c")
     fun comment(s: String) {
         consumer.onTagComment(s)
     }
@@ -54,17 +61,22 @@ interface Tag {
 
 @HtmlTagMarker
 interface Unsafe {
+    @JsName("p")
     operator fun String.unaryPlus()
+    @JsName("p2")
     operator fun Entities.unaryPlus() = +text
 
+    @JsName("r")
     fun raw(s: String) {
         +s
     }
 
+    @JsName("r2")
     fun raw(entity: Entities) {
         +entity
     }
 
+    @JsName("r3")
     fun raw(n: Number) {
         +n.toString()
     }
