@@ -193,7 +193,7 @@ fun Appendable.consumerBuilderJS(tag : TagInfo, blockOrContent : Boolean) {
     tagKdoc(tag)
     htmlDslMarker()
     append("public ")
-    if (tagBuilderCouldBeInline(tag, blockOrContent)) append("inline ")
+//    if (tagBuilderCouldBeInline(tag, blockOrContent)) append("inline ")
     function(tag.memberName, tagBuilderFunctionArguments(tag, blockOrContent), resultType, receiver = "TagConsumer<HTMLElement>")
     defineIs(buildString {
         functionCall(tag.className, constructorArgs)
@@ -222,7 +222,7 @@ fun Appendable.consumerBuilderShared(tag : TagInfo, blockOrContent : Boolean) {
 
     tagKdoc(tag)
     htmlDslMarker()
-    if (tagBuilderCouldBeInline(tag, blockOrContent)) append("inline ")
+//    if (tagBuilderCouldBeInline(tag, blockOrContent)) append("inline ")
     function(tag.memberName, tagBuilderFunctionArguments(tag, blockOrContent), "T", listOf("T", "C : TagConsumer<T>"), "C")
     defineIs(buildString {
         functionCall(tag.className, constructorArgs)
@@ -248,7 +248,7 @@ fun Appendable.htmlTagBuilderMethod(receiver : String, tag : TagInfo, blockOrCon
 
     tagKdoc(tag)
     htmlDslMarker()
-    if (tagBuilderCouldBeInline(tag, blockOrContent)) append("inline ")
+//    if (tagBuilderCouldBeInline(tag, blockOrContent)) append("inline ")
     function(tag.memberName, arguments, "Unit", receiver = receiver)
     defineIs(buildString {
         functionCall(tag.className, constructorArgs)
@@ -280,7 +280,7 @@ fun Appendable.htmlTagEnumBuilderMethod(receiver : String, tag : TagInfo, blockO
 
         indent(indent)
         htmlDslMarker()
-        if (tagBuilderCouldBeInline(tag, blockOrContent)) append("inline ")
+//        if (tagBuilderCouldBeInline(tag, blockOrContent)) append("inline ")
         function(enumValue.fieldName + tag.memberName.capitalize(), arguments, "Unit", receiver = receiver)
         defineIs(buildString {
             functionCall(tag.className, constructorArgs)
@@ -342,7 +342,7 @@ private fun tagBuilderFunctionArguments(tag: TagInfo, blockOrContent : Boolean) 
     }
 
     fun addBlockParameter() {
-        arguments.add(Var("crossinline block", "${tag.className}.() -> Unit", defaultValue = "{}"))
+        arguments.add(Var("block", "${tag.className}.() -> Unit", defaultValue = "{}"))
     }
 
     fun addContentParameter() {

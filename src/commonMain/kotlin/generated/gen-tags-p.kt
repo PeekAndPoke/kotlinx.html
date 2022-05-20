@@ -41,13 +41,13 @@ open class PICTURE(initialAttributes : Map<String, String>, override val consume
  * Media source for 
  */
 @HtmlTagMarker
-inline fun PICTURE.source(classes : String? = null, crossinline block : SOURCE.() -> Unit = {}) : Unit = SOURCE(attributesMapOf("class", classes), consumer).visit(block)
+fun PICTURE.source(classes : String? = null, block : SOURCE.() -> Unit = {}) : Unit = SOURCE(attributesMapOf("class", classes), consumer).visit(block)
 
 /**
  * Embedded image
  */
 @HtmlTagMarker
-inline fun PICTURE.img(alt : String? = null, src : String? = null, classes : String? = null, crossinline block : IMG.() -> Unit = {}) : Unit = IMG(attributesMapOf("alt", alt,"src", src,"class", classes), consumer).visit(block)
+fun PICTURE.img(alt : String? = null, src : String? = null, classes : String? = null, block : IMG.() -> Unit = {}) : Unit = IMG(attributesMapOf("alt", alt,"src", src,"class", classes), consumer).visit(block)
 
 val PICTURE.asFlowContent : FlowContent
     get()  = this

@@ -51,8 +51,7 @@ class Html5TagsTest {
                 <html>
                   <body>
                     <h1>header</h1>
-                    <div>
-                      content<span>yo</span>
+                    <div>content<span>yo</span>
                     </div>
                   </body>
                 </html>""".trimIndent(), tree.serialize(true).trim().replace("\r\n", "\n"))
